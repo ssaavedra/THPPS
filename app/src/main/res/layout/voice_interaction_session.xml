@@ -16,27 +16,44 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="fill_parent"
-             android:layout_height="match_parent"
-             android:fitsSystemWindows="true">
-    <FrameLayout android:layout_width="fill_parent"
-                 android:layout_height="match_parent"
-                 android:padding="8dp">
-        <LinearLayout android:id="@+id/content"
-                      android:layout_width="fill_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical"
-                      android:background="#ffffffff"
-                      android:elevation="8dp"
-        >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:orientation="horizontal">
+
+    <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#ffffffff"
+            android:elevation="8dp"
+            >
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="I got the following plaintext information"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal"/>
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrollView">
 
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/assist_text_placeholder"
-                    android:id="@+id/text"/>
-        </LinearLayout>
-    </FrameLayout>
-</FrameLayout>
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:id="@+id/text"
+                    android:elevation="8dp"
+                    android:textColor="@color/colorPrimary"/>
+        </ScrollView>
+
+    </LinearLayout>
+</LinearLayout>

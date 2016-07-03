@@ -29,19 +29,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Iterator;
+
 public class JarvisSession extends VoiceInteractionSession {
     private static final String TAG = "JarvisSession";
 
 
     private View mContentView;
     private TextView mText;
-    private Button mStartButton;
-    private Button mConfirmButton;
-    private Button mCompleteButton;
-    private Button mAbortButton;
-
-    private int mState;
-
 
     public JarvisSession(Context context) {
         super(context);
@@ -53,13 +48,22 @@ public class JarvisSession extends VoiceInteractionSession {
 
         Log.i(TAG, "onHandleAssist with structure = " + structure);
 
-        mText.setText("I will at some point assist you about " + structure
-                .getActivityComponent().flattenToString());
+        final StringBuilder sContent = new StringBuilder();
+        final WindowNavigator navigator = new WindowNavigator(structure.getWindowNodeAt(0));
 
-        Toast.makeText(getContext(), "v2: Called inside " +
-                structure.getActivityComponent()
-                        .flattenToShortString(), Toast.LENGTH_LONG)
-                .show();
+        final Iterable<CharSequence> texts = new Iterable<CharSequence>() {
+            @Override
+            public Iterator<CharSequence> iterator() {
+                return navigator.getAllTexts();
+            }
+        };
+
+        for (CharSequence text : texts) {
+            sContent.append(text);
+            sContent.append("\n");
+        }
+
+        mText.setText(sContent.toString());
     }
 
     @Override
